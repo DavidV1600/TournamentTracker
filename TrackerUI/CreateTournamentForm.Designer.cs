@@ -43,7 +43,7 @@
             this.deletePlayersButton = new System.Windows.Forms.Button();
             this.deleteSelectedPrizes = new System.Windows.Forms.Button();
             this.tournamentPrizesLabel = new System.Windows.Forms.Label();
-            this.tournamentPrizesTextBox = new System.Windows.Forms.ListBox();
+            this.tournamentPrizesListBox = new System.Windows.Forms.ListBox();
             this.createTournamentButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -197,15 +197,15 @@
             this.tournamentPrizesLabel.TabIndex = 24;
             this.tournamentPrizesLabel.Text = "Prizes";
             // 
-            // tournamentPrizesTextBox
+            // tournamentPrizesListBox
             // 
-            this.tournamentPrizesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tournamentPrizesTextBox.FormattingEnabled = true;
-            this.tournamentPrizesTextBox.ItemHeight = 16;
-            this.tournamentPrizesTextBox.Location = new System.Drawing.Point(424, 416);
-            this.tournamentPrizesTextBox.Name = "tournamentPrizesTextBox";
-            this.tournamentPrizesTextBox.Size = new System.Drawing.Size(305, 162);
-            this.tournamentPrizesTextBox.TabIndex = 23;
+            this.tournamentPrizesListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tournamentPrizesListBox.FormattingEnabled = true;
+            this.tournamentPrizesListBox.ItemHeight = 16;
+            this.tournamentPrizesListBox.Location = new System.Drawing.Point(424, 416);
+            this.tournamentPrizesListBox.Name = "tournamentPrizesListBox";
+            this.tournamentPrizesListBox.Size = new System.Drawing.Size(305, 162);
+            this.tournamentPrizesListBox.TabIndex = 23;
             // 
             // createTournamentButton
             // 
@@ -226,7 +226,7 @@
             this.Controls.Add(this.createTournamentButton);
             this.Controls.Add(this.deleteSelectedPrizes);
             this.Controls.Add(this.tournamentPrizesLabel);
-            this.Controls.Add(this.tournamentPrizesTextBox);
+            this.Controls.Add(this.tournamentPrizesListBox);
             this.Controls.Add(this.deletePlayersButton);
             this.Controls.Add(this.tournamentPlayersLabel);
             this.Controls.Add(this.tournamentPlayersListBox);
@@ -264,7 +264,7 @@
         private System.Windows.Forms.Button deletePlayersButton;
         private System.Windows.Forms.Button deleteSelectedPrizes;
         private System.Windows.Forms.Label tournamentPrizesLabel;
-        private System.Windows.Forms.ListBox tournamentPrizesTextBox;
+        private System.Windows.Forms.ListBox tournamentPrizesListBox;
         private System.Windows.Forms.Button createTournamentButton;
     }
 }

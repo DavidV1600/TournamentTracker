@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TrackerUI
+namespace Refac
 {
     internal static class Program
     {
@@ -16,9 +16,7 @@ namespace TrackerUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            //TrackerLibrary.GlobalConfig.InitializeConnections(true, true);
-            Application.Run(new CreatePrizeForm());
+            Application.Run(new Form1());
         }
     }
 }
