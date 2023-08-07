@@ -1,3 +1,6 @@
+using MySqlConnector;
+using System.Data.SqlClient;
+
 namespace Test
 {
     internal static class Program
@@ -10,6 +13,7 @@ namespace Test
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+
             TrackerLibrary.GlobalConfig.InitializeConnections(true,true);
             ApplicationConfiguration.Initialize();
             Application.Run(new CreatePrizeForm());

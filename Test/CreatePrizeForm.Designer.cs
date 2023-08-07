@@ -109,6 +109,7 @@
             createPrizeButton.TabIndex = 6;
             createPrizeButton.Text = "Create Prize";
             createPrizeButton.UseVisualStyleBackColor = true;
+            createPrizeButton.Click += createPrizeButton_Click;
             // 
             // placeNumberValue
             // 
@@ -123,6 +124,7 @@
             prizeAmountValue.Name = "prizeAmountValue";
             prizeAmountValue.Size = new Size(125, 27);
             prizeAmountValue.TabIndex = 8;
+            prizeAmountValue.Text = "0";
             // 
             // prizePercentageValue
             // 
@@ -130,6 +132,7 @@
             prizePercentageValue.Name = "prizePercentageValue";
             prizePercentageValue.Size = new Size(125, 27);
             prizePercentageValue.TabIndex = 9;
+            prizePercentageValue.Text = "0";
             // 
             // placeNameValue
             // 
