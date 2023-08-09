@@ -40,12 +40,13 @@
             lastNameValue = new TextBox();
             emailValue = new TextBox();
             cellphoneValue = new TextBox();
-            selectedTeamMemberValue = new ComboBox();
+            selectTeamMemberDropDown = new ComboBox();
             deleteMembersListBox = new ListBox();
             addTeamButton = new Button();
             createMemberButton = new Button();
-            deleteSelectedMembersButton = new Button();
+            removeSelectedMembersButton = new Button();
             addMemberGroupBox = new GroupBox();
+            createTeamButton = new Button();
             addMemberGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -156,13 +157,13 @@
             cellphoneValue.Size = new Size(125, 27);
             cellphoneValue.TabIndex = 11;
             // 
-            // selectedTeamMemberValue
+            // selectTeamMemberDropDown
             // 
-            selectedTeamMemberValue.FormattingEnabled = true;
-            selectedTeamMemberValue.Location = new Point(36, 195);
-            selectedTeamMemberValue.Name = "selectedTeamMemberValue";
-            selectedTeamMemberValue.Size = new Size(281, 28);
-            selectedTeamMemberValue.TabIndex = 12;
+            selectTeamMemberDropDown.FormattingEnabled = true;
+            selectTeamMemberDropDown.Location = new Point(36, 195);
+            selectTeamMemberDropDown.Name = "selectTeamMemberDropDown";
+            selectTeamMemberDropDown.Size = new Size(281, 28);
+            selectTeamMemberDropDown.TabIndex = 12;
             // 
             // deleteMembersListBox
             // 
@@ -170,17 +171,18 @@
             deleteMembersListBox.ItemHeight = 20;
             deleteMembersListBox.Location = new Point(392, 70);
             deleteMembersListBox.Name = "deleteMembersListBox";
-            deleteMembersListBox.Size = new Size(316, 504);
+            deleteMembersListBox.Size = new Size(316, 424);
             deleteMembersListBox.TabIndex = 13;
             // 
             // addTeamButton
             // 
-            addTeamButton.Location = new Point(142, 238);
+            addTeamButton.Location = new Point(89, 239);
             addTeamButton.Name = "addTeamButton";
-            addTeamButton.Size = new Size(94, 29);
+            addTeamButton.Size = new Size(175, 29);
             addTeamButton.TabIndex = 14;
             addTeamButton.Text = "Add Team Member";
             addTeamButton.UseVisualStyleBackColor = true;
+            addTeamButton.Click += addTeamButton_Click;
             // 
             // createMemberButton
             // 
@@ -190,15 +192,17 @@
             createMemberButton.TabIndex = 15;
             createMemberButton.Text = "Create Member";
             createMemberButton.UseVisualStyleBackColor = true;
+            createMemberButton.Click += createMemberButton_Click;
             // 
-            // deleteSelectedMembersButton
+            // removeSelectedMembersButton
             // 
-            deleteSelectedMembersButton.Location = new Point(724, 274);
-            deleteSelectedMembersButton.Name = "deleteSelectedMembersButton";
-            deleteSelectedMembersButton.Size = new Size(221, 89);
-            deleteSelectedMembersButton.TabIndex = 16;
-            deleteSelectedMembersButton.Text = "Delete Selected";
-            deleteSelectedMembersButton.UseVisualStyleBackColor = true;
+            removeSelectedMembersButton.Location = new Point(724, 274);
+            removeSelectedMembersButton.Name = "removeSelectedMembersButton";
+            removeSelectedMembersButton.Size = new Size(221, 89);
+            removeSelectedMembersButton.TabIndex = 16;
+            removeSelectedMembersButton.Text = "Remove Selected";
+            removeSelectedMembersButton.UseVisualStyleBackColor = true;
+            removeSelectedMembersButton.Click += removeSelectedMembersButton_Click;
             // 
             // addMemberGroupBox
             // 
@@ -218,16 +222,28 @@
             addMemberGroupBox.TabStop = false;
             addMemberGroupBox.Text = "Add New Member";
             // 
+            // createTeamButton
+            // 
+            createTeamButton.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            createTeamButton.Location = new Point(392, 511);
+            createTeamButton.Name = "createTeamButton";
+            createTeamButton.Size = new Size(316, 104);
+            createTeamButton.TabIndex = 18;
+            createTeamButton.Text = "Create Team";
+            createTeamButton.UseVisualStyleBackColor = true;
+            createTeamButton.Click += createTeamButton_Click;
+            // 
             // CreateTeamForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(957, 614);
+            ClientSize = new Size(957, 677);
+            Controls.Add(createTeamButton);
             Controls.Add(addMemberGroupBox);
-            Controls.Add(deleteSelectedMembersButton);
+            Controls.Add(removeSelectedMembersButton);
             Controls.Add(addTeamButton);
             Controls.Add(deleteMembersListBox);
-            Controls.Add(selectedTeamMemberValue);
+            Controls.Add(selectTeamMemberDropDown);
             Controls.Add(teamNameValue);
             Controls.Add(selectTeamMemberLabel);
             Controls.Add(teamNameLabel);
@@ -254,11 +270,12 @@
         private TextBox lastNameValue;
         private TextBox emailValue;
         private TextBox cellphoneValue;
-        private ComboBox selectedTeamMemberValue;
+        private ComboBox selectTeamMemberDropDown;
         private ListBox deleteMembersListBox;
         private Button addTeamButton;
         private Button createMemberButton;
-        private Button deleteSelectedMembersButton;
+        private Button removeSelectedMembersButton;
         private GroupBox addMemberGroupBox;
+        private Button createTeamButton;
     }
 }

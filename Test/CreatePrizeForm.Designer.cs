@@ -159,6 +159,7 @@
             Controls.Add(createPrizeLabel);
             Name = "CreatePrizeForm";
             Text = "CreatePrizeForm";
+            Load += CreatePrizeForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

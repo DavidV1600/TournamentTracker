@@ -8,6 +8,7 @@ namespace TrackerLibrary.Models
 {
     public class Person
     {
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -17,5 +18,12 @@ namespace TrackerLibrary.Models
 
         public string CellPhone { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
     }
 }

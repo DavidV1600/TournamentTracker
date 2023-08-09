@@ -44,7 +44,7 @@
             deleteSelectedTeamsButton = new Button();
             deleteSelectedPrizesButton = new Button();
             createNewTeamLink = new LinkLabel();
-            selectedTeamValue = new ComboBox();
+            selectedTeamDropDown = new ComboBox();
             SuspendLayout();
             // 
             // createTournamentLabel
@@ -116,7 +116,7 @@
             // 
             prizesLabel.AutoSize = true;
             prizesLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            prizesLabel.Location = new Point(435, 338);
+            prizesLabel.Location = new Point(453, 338);
             prizesLabel.Name = "prizesLabel";
             prizesLabel.Size = new Size(73, 31);
             prizesLabel.TabIndex = 14;
@@ -148,6 +148,7 @@
             createPrizeButton.TabIndex = 18;
             createPrizeButton.Text = "Create Prize";
             createPrizeButton.UseVisualStyleBackColor = true;
+            createPrizeButton.Click += createPrizeButton_Click;
             // 
             // createTournamentButton
             // 
@@ -166,6 +167,7 @@
             addTeamButton.TabIndex = 20;
             addTeamButton.Text = "Add Team";
             addTeamButton.UseVisualStyleBackColor = true;
+            addTeamButton.Click += addTeamButton_Click;
             // 
             // deleteSelectedTeamsButton
             // 
@@ -195,20 +197,20 @@
             createNewTeamLink.TabStop = true;
             createNewTeamLink.Text = "Create New";
             // 
-            // selectedTeamValue
+            // selectedTeamDropDown
             // 
-            selectedTeamValue.FormattingEnabled = true;
-            selectedTeamValue.Location = new Point(85, 416);
-            selectedTeamValue.Name = "selectedTeamValue";
-            selectedTeamValue.Size = new Size(237, 28);
-            selectedTeamValue.TabIndex = 24;
+            selectedTeamDropDown.FormattingEnabled = true;
+            selectedTeamDropDown.Location = new Point(85, 416);
+            selectedTeamDropDown.Name = "selectedTeamDropDown";
+            selectedTeamDropDown.Size = new Size(237, 28);
+            selectedTeamDropDown.TabIndex = 24;
             // 
             // CreateTournamentForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(990, 705);
-            Controls.Add(selectedTeamValue);
+            Controls.Add(selectedTeamDropDown);
             Controls.Add(createNewTeamLink);
             Controls.Add(deleteSelectedPrizesButton);
             Controls.Add(deleteSelectedTeamsButton);
@@ -227,6 +229,7 @@
             Controls.Add(createTournamentLabel);
             Name = "CreateTournamentForm";
             Text = "CreateTournamentForm";
+            Load += CreateTournamentForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -249,6 +252,6 @@
         private Button deleteSelectedTeamsButton;
         private Button deleteSelectedPrizesButton;
         private LinkLabel createNewTeamLink;
-        private ComboBox selectedTeamValue;
+        private ComboBox selectedTeamDropDown;
     }
 }
