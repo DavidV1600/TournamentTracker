@@ -293,6 +293,34 @@ namespace TrackerLibrary.DataAcces
 
             return output;
         }
+
+        public void UpdateMatchup(Matchup model)
+        {
+            string connectionString = db;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            string query = "";
+            SqlCommand cmd = new SqlCommand();
+
+            if (model.Winner != null)
+            {
+                query = "update dbo.Matchups set WinnerId=" + model.Winner.Id + " where id=" + model.Id;
+                cmd = new SqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (MatchupEntry me in model.Entries)
+            {
+                if (me.TeamCompeting != null)
+                {
+                    query = "update dbo.MatchupEntries set TeamCompetingId=" + me.TeamCompeting.Id + " , Score=" + me.Score + " where id=" + me.Id;
+                    cmd = new SqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            conn.Close();
+
+        }
     }
 
 }

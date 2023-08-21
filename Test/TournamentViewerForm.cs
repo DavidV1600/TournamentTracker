@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace Test
@@ -94,6 +95,22 @@ namespace Test
             {
                 LoadMatchup(selectedMatchups.First());
             }
+
+            DisplayMatchupInfo();
+        }
+
+        private void DisplayMatchupInfo()
+        {
+            bool isVisible = (selectedMatchups.Count > 0);
+
+            teamOneLabel.Visible = isVisible;
+            teamTwoLabel.Visible = isVisible;
+            score1Label.Visible = isVisible;
+            score2Label.Visible = isVisible;
+            score1Value.Visible = isVisible;
+            score2Value.Visible = isVisible;
+            vsLabel.Visible = isVisible;
+            scoreButton.Visible = isVisible;
         }
 
         private void LoadMatchup(Matchup m)
@@ -151,6 +168,7 @@ namespace Test
         private void unplayedOnlyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             LoadMatchups((int)roundDropDown.SelectedItem);
+
         }
 
         private void scoreButton_Click(object sender, EventArgs e)
@@ -166,7 +184,7 @@ namespace Test
                 {
                     if (m.Entries[0].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(score1Value.Text,out teamOneScore);
+                        bool scoreValid = double.TryParse(score1Value.Text, out teamOneScore);
 
                         if (scoreValid)
                         {
@@ -201,12 +219,12 @@ namespace Test
                 }
             }
 
-            if(teamOneScore > teamTwoScore)
+            if (teamOneScore > teamTwoScore)
             {
                 //Team one wins
                 m.Winner = m.Entries[0].TeamCompeting;
             }
-            else if(teamOneScore < teamTwoScore)
+            else if (teamOneScore < teamTwoScore)
             {
                 m.Winner = m.Entries[1].TeamCompeting;
             }
@@ -214,6 +232,29 @@ namespace Test
             {
                 MessageBox.Show("It is a draw... for now");
             }
+
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                foreach (Matchup rm in round)
+                {
+                    foreach (MatchupEntry me in rm.Entries)
+                    {
+                        if (me.ParentMatchup != null)
+                        {
+                            if (me.ParentMatchup.Id == m.Id)
+                            {
+                                me.TeamCompeting = m.Winner;
+                                GlobalConfig.Connections[0].UpdateMatchup(rm);
+                            }
+                        }
+                    }
+                }
+
+                LoadMatchups((int)roundDropDown.SelectedItem);
+
+                GlobalConfig.Connections[0].UpdateMatchup(m);
+            }
         }
     }
 }
+
