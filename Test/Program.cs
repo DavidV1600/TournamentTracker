@@ -16,7 +16,7 @@ namespace Test
 
             TrackerLibrary.GlobalConfig.InitializeConnections(true,false);//1-Sql, 2-Txt
             ApplicationConfiguration.Initialize();
-            Application.Run(new CreateTournamentForm());
+            Application.Run(new TournamentDashboardForm());
         }
     }
 }

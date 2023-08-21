@@ -7,8 +7,8 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public interface IPrizeRequester
+    public interface ITeamRequestor
     {
-        void PrizeComplete(Prize model);
+        void TeamComplete(Team model);
     }
 }

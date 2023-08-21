@@ -25,6 +25,9 @@ namespace TrackerLibrary.DataAcces
             //MERGE ASTA DE SUS NU TRE SA PUI LA ID VALOARE
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.ExecuteNonQuery();
+            query = "SELECT COUNT(*) from dbo.People";
+            cmd =new SqlCommand(query, conn);
+            model.Id=(int)cmd.ExecuteScalar();
             conn.Close();
             return model;
         }
@@ -41,7 +44,7 @@ namespace TrackerLibrary.DataAcces
             SqlCommand cmd = new SqlCommand(query,conn);
             cmd.ExecuteNonQuery();
 
-            query = "SELECT COUNT(*) from dbo.People";
+            query = "SELECT COUNT(*) from dbo.Prizes";
             cmd=new SqlCommand(query,conn);
             model.Id=(int)cmd.ExecuteScalar();
             conn.Close();
@@ -59,11 +62,15 @@ namespace TrackerLibrary.DataAcces
                 "('" + model.TeamName + "')";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.ExecuteNonQuery();
+            conn.Close() ;
 
+            conn.Open() ;
             query = "SELECT COUNT(*) from dbo.Teams";
             cmd = new SqlCommand(query, conn);
             model.Id = (int)cmd.ExecuteScalar();
+            conn.Close();
 
+            conn.Open();
             foreach (Person p in model.TeamMembers)
             {
                 query = "INSERT INTO  dbo.TeamMembers (TeamId,PersonId) VALUES"+
@@ -74,6 +81,88 @@ namespace TrackerLibrary.DataAcces
 
             conn.Close();
             return model;
+        }
+
+        public void CreateTournament(Tournament model)
+        {
+            string connectionString = db;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            //Should Write some SaveTournament function and others to write this code there
+            string query = "INSERT INTO dbo.Tournaments (TournamentName,EntryFee) VALUES" +
+                "('" + model.TournamentName + "',"+model.EntryFee+")";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.ExecuteNonQuery();
+            query = "SELECT COUNT(*) from dbo.Tournaments";
+            cmd = new SqlCommand(query, conn);
+            model.Id = (int)cmd.ExecuteScalar();
+
+            foreach (Team t in model.EnteredTeams)
+            {
+                query = "INSERT INTO  dbo.TournamentEntries (TournamentId,TeamId) VALUES" +
+                    "(" + model.Id + "," + t.Id + ")";
+                cmd = new SqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+
+                /*query = "SELECT COUNT(*) from dbo.TournamentEntries";
+                cmd = new SqlCommand(query, conn);
+                t.Id = (int)cmd.ExecuteScalar();*/
+            }
+            
+
+
+            foreach (Prize p in model.Prizes)
+            {
+                query = "INSERT INTO dbo.TournamentPrizes (TournamentId,PrizeId) VALUES"+
+                    "("+model.Id +","+p.Id+")";
+            }
+
+            foreach (List<Matchup> round in model.Rounds)
+            {
+                foreach(Matchup matchup in round)
+                {
+                    query = "INSERT INTO  dbo.Matchups (MatchupRound,TournamentId) VALUES" +
+                    "(" + matchup.MatchupRound + "," + model.Id + ")";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+
+                    query = "SELECT COUNT(*) from dbo.Matchups";
+                    cmd = new SqlCommand(query, conn);
+                    matchup.Id = (int)cmd.ExecuteScalar();
+
+                    foreach(MatchupEntry entry in matchup.Entries)
+                    {
+                        if(entry.TeamCompeting == null && entry.ParentMatchup==null)
+                        {
+                            query = "INSERT INTO  dbo.MatchupEntries (MatchupId) VALUES" +
+                            "(" + matchup.Id +")";
+                        }
+                        else if(entry.TeamCompeting == null)
+                        {
+                            query = "INSERT INTO  dbo.MatchupEntries (MatchupId,ParentMatchupId) VALUES" +
+                            "(" + matchup.Id + "," + entry.ParentMatchup.Id+")";
+                        }
+                        else if(entry.ParentMatchup == null)
+                        {
+                            query = "INSERT INTO  dbo.MatchupEntries (MatchupId,TeamCompetingId) VALUES" +
+                            "(" + matchup.Id +","+ entry.TeamCompeting.Id+")";
+                        }
+                        else
+                        {
+                            query = "INSERT INTO  dbo.MatchupEntries (MatchupId,ParentMatchupId,TeamCompetingId) VALUES" +
+                            "(" + matchup.Id + "," + entry.ParentMatchup.Id + "," + entry.TeamCompeting.Id + ")";
+                        }
+                        cmd = new SqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+
+                        query = "SELECT COUNT(*) from dbo.MatchupEntries";
+                        cmd = new SqlCommand(query, conn);
+                        entry.Id = (int)cmd.ExecuteScalar();
+                    }
+                }
+            }
+
+            conn.Close();
         }
 
         public List<Person> GetPerson_All()
@@ -113,6 +202,94 @@ namespace TrackerLibrary.DataAcces
             }
 
             conn.Close() ;
+
+            return output;
+        }
+
+        public List<Tournament> GetTournament_All()
+        {
+            string connectionString = db;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            List<Tournament> output;
+
+            string query = "Select * from dbo.Tournaments";
+
+            output = conn.Query<Tournament>(query).ToList();
+
+            foreach (Tournament tournament in output)
+            {
+                query = "select p.* from dbo.Prizes p " +
+                    "inner join dbo.TournamentPrizes t on p.id=t.PrizeId " +
+                    "where t.TournamentId=" + tournament.Id;
+
+                tournament.Prizes = conn.Query<Prize>(query).ToList();
+
+                query= "select t.* from dbo.Teams t  " +
+                    "inner join dbo.TournamentEntries e on t.id=e.TeamId "+
+                    "where e.TournamentId=" + tournament.Id;
+
+                tournament.EnteredTeams = conn.Query<Team>(query).ToList();
+
+                foreach (Team team in tournament.EnteredTeams)
+                {
+                    query = "select p.* from dbo.TeamMembers m " +
+                    "inner join dbo.People p on m.PersonId=p.id " +
+                    "where m.TeamId=" + team.Id;
+                    team.TeamMembers = conn.Query<Person>(query).ToList();
+                }
+
+                query = "select m.* from dbo.Matchups m " +
+                "where m.TournamentId=" + tournament.Id+
+                " order by MatchupRound";
+                
+                List<Matchup> matchups = conn.Query<Matchup>(query).ToList();
+
+                foreach (Matchup m in matchups)
+                {
+                    query = "select * from dbo.MatchupEntries "+
+                    "where MatchupId="+m.Id;
+
+                    m.Entries = conn.Query<MatchupEntry>(query).ToList();
+
+                    List<Team> allTeams = GetTeam_All();
+
+                    if(m.WinnerId > 0)
+                    {
+                        m.Winner = allTeams.Where(x => x.Id == m.WinnerId).First();
+                    }
+
+                    foreach (var me in m.Entries)
+                    {
+                        if(me.TeamCompetingId > 0)
+                        {
+                            me.TeamCompeting = allTeams.Where(x => x.Id == me.TeamCompetingId).First();
+                        }
+
+                        if(me.ParentMatchupId > 0)
+                        {
+                            me.ParentMatchup = matchups.Where(x => x.Id == me.ParentMatchupId).First();
+                        }
+                    }
+                }
+                List<Matchup> currRow = new List<Matchup>();
+                int currRound = 1;
+                foreach(Matchup m in matchups)
+                {
+                    if(m.MatchupRound >  currRound)
+                    {
+                        tournament.Rounds.Add(currRow);
+                        currRow = new List<Matchup>();
+                        currRound += 1;
+                    }
+
+                    currRow.Add(m);
+                }
+
+                tournament.Rounds.Add(currRow);
+            }
+
+            conn.Close();
 
             return output;
         }

@@ -30,7 +30,7 @@
         {
             tournamentDashboardLabel = new Label();
             existingTournamentLabel = new Label();
-            tournamentChosenValue = new ComboBox();
+            loadExistingTournamentDropDown = new ComboBox();
             loadTournamentButton = new Button();
             createTournamentButton = new Button();
             SuspendLayout();
@@ -55,13 +55,13 @@
             existingTournamentLabel.TabIndex = 1;
             existingTournamentLabel.Text = "Load Existing Tournament";
             // 
-            // tournamentChosenValue
+            // loadExistingTournamentDropDown
             // 
-            tournamentChosenValue.FormattingEnabled = true;
-            tournamentChosenValue.Location = new Point(226, 193);
-            tournamentChosenValue.Name = "tournamentChosenValue";
-            tournamentChosenValue.Size = new Size(151, 28);
-            tournamentChosenValue.TabIndex = 2;
+            loadExistingTournamentDropDown.FormattingEnabled = true;
+            loadExistingTournamentDropDown.Location = new Point(226, 193);
+            loadExistingTournamentDropDown.Name = "loadExistingTournamentDropDown";
+            loadExistingTournamentDropDown.Size = new Size(151, 28);
+            loadExistingTournamentDropDown.TabIndex = 2;
             // 
             // loadTournamentButton
             // 
@@ -71,6 +71,7 @@
             loadTournamentButton.TabIndex = 3;
             loadTournamentButton.Text = "Load Tournament";
             loadTournamentButton.UseVisualStyleBackColor = true;
+            loadTournamentButton.Click += loadTournamentButton_Click;
             // 
             // createTournamentButton
             // 
@@ -80,6 +81,7 @@
             createTournamentButton.TabIndex = 4;
             createTournamentButton.Text = "Create Tournament";
             createTournamentButton.UseVisualStyleBackColor = true;
+            createTournamentButton.Click += createTournamentButton_Click;
             // 
             // TournamentDashboardForm
             // 
@@ -88,11 +90,13 @@
             ClientSize = new Size(602, 543);
             Controls.Add(createTournamentButton);
             Controls.Add(loadTournamentButton);
-            Controls.Add(tournamentChosenValue);
+            Controls.Add(loadExistingTournamentDropDown);
             Controls.Add(existingTournamentLabel);
             Controls.Add(tournamentDashboardLabel);
             Name = "TournamentDashboardForm";
             Text = "TournamentDashboardForm";
+            Load += TournamentDashboardForm_Load;
+            MouseCaptureChanged += TournamentDashboardForm_MouseCaptureChanged;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -101,7 +105,7 @@
 
         private Label tournamentDashboardLabel;
         private Label existingTournamentLabel;
-        private ComboBox tournamentChosenValue;
+        private ComboBox loadExistingTournamentDropDown;
         private Button loadTournamentButton;
         private Button createTournamentButton;
     }

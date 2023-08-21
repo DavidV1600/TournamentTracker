@@ -250,6 +250,7 @@
             Controls.Add(createTeamLabel);
             Name = "CreateTeamForm";
             Text = "CreateTeamForm";
+            Load += CreateTeamForm_Load;
             addMemberGroupBox.ResumeLayout(false);
             addMemberGroupBox.PerformLayout();
             ResumeLayout(false);

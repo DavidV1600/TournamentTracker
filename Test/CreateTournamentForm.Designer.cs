@@ -41,8 +41,8 @@
             createPrizeButton = new Button();
             createTournamentButton = new Button();
             addTeamButton = new Button();
-            deleteSelectedTeamsButton = new Button();
-            deleteSelectedPrizesButton = new Button();
+            removeSelectedTeamsButton = new Button();
+            removeSelectedPrizesButton = new Button();
             createNewTeamLink = new LinkLabel();
             selectedTeamDropDown = new ComboBox();
             SuspendLayout();
@@ -158,6 +158,7 @@
             createTournamentButton.TabIndex = 19;
             createTournamentButton.Text = "Create Tournament";
             createTournamentButton.UseVisualStyleBackColor = true;
+            createTournamentButton.Click += createTournamentButton_Click;
             // 
             // addTeamButton
             // 
@@ -169,23 +170,25 @@
             addTeamButton.UseVisualStyleBackColor = true;
             addTeamButton.Click += addTeamButton_Click;
             // 
-            // deleteSelectedTeamsButton
+            // removeSelectedTeamsButton
             // 
-            deleteSelectedTeamsButton.Location = new Point(769, 172);
-            deleteSelectedTeamsButton.Name = "deleteSelectedTeamsButton";
-            deleteSelectedTeamsButton.Size = new Size(150, 62);
-            deleteSelectedTeamsButton.TabIndex = 21;
-            deleteSelectedTeamsButton.Text = "Delete Selected";
-            deleteSelectedTeamsButton.UseVisualStyleBackColor = true;
+            removeSelectedTeamsButton.Location = new Point(769, 172);
+            removeSelectedTeamsButton.Name = "removeSelectedTeamsButton";
+            removeSelectedTeamsButton.Size = new Size(150, 62);
+            removeSelectedTeamsButton.TabIndex = 21;
+            removeSelectedTeamsButton.Text = "Remove Selected";
+            removeSelectedTeamsButton.UseVisualStyleBackColor = true;
+            removeSelectedTeamsButton.Click += deleteSelectedTeamsButton_Click;
             // 
-            // deleteSelectedPrizesButton
+            // removeSelectedPrizesButton
             // 
-            deleteSelectedPrizesButton.Location = new Point(769, 416);
-            deleteSelectedPrizesButton.Name = "deleteSelectedPrizesButton";
-            deleteSelectedPrizesButton.Size = new Size(150, 67);
-            deleteSelectedPrizesButton.TabIndex = 22;
-            deleteSelectedPrizesButton.Text = "Delete Selected";
-            deleteSelectedPrizesButton.UseVisualStyleBackColor = true;
+            removeSelectedPrizesButton.Location = new Point(769, 416);
+            removeSelectedPrizesButton.Name = "removeSelectedPrizesButton";
+            removeSelectedPrizesButton.Size = new Size(150, 67);
+            removeSelectedPrizesButton.TabIndex = 22;
+            removeSelectedPrizesButton.Text = "Remove Selected";
+            removeSelectedPrizesButton.UseVisualStyleBackColor = true;
+            removeSelectedPrizesButton.Click += removeSelectedPrizesButton_Click;
             // 
             // createNewTeamLink
             // 
@@ -196,6 +199,7 @@
             createNewTeamLink.TabIndex = 23;
             createNewTeamLink.TabStop = true;
             createNewTeamLink.Text = "Create New";
+            createNewTeamLink.LinkClicked += createNewTeamLink_LinkClicked;
             // 
             // selectedTeamDropDown
             // 
@@ -212,8 +216,8 @@
             ClientSize = new Size(990, 705);
             Controls.Add(selectedTeamDropDown);
             Controls.Add(createNewTeamLink);
-            Controls.Add(deleteSelectedPrizesButton);
-            Controls.Add(deleteSelectedTeamsButton);
+            Controls.Add(removeSelectedPrizesButton);
+            Controls.Add(removeSelectedTeamsButton);
             Controls.Add(addTeamButton);
             Controls.Add(createTournamentButton);
             Controls.Add(createPrizeButton);
@@ -249,8 +253,8 @@
         private Button createPrizeButton;
         private Button createTournamentButton;
         private Button addTeamButton;
-        private Button deleteSelectedTeamsButton;
-        private Button deleteSelectedPrizesButton;
+        private Button removeSelectedTeamsButton;
+        private Button removeSelectedPrizesButton;
         private LinkLabel createNewTeamLink;
         private ComboBox selectedTeamDropDown;
     }

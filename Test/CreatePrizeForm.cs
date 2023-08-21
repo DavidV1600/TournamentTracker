@@ -40,10 +40,15 @@ namespace Test
                     db.CreatePrize(model);
                 }
 
-                placeNameValue.Text = "";
+                callingForm.PrizeComplete(model);
+
+                this.Close();
+
+                /*placeNameValue.Text = "";
                 placeNumberValue.Text = "";
                 prizeAmountValue.Text = "0";
                 prizePercentageValue.Text = "0";
+                */
             }
             else
             {

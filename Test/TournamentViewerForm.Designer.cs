@@ -38,7 +38,7 @@
             score2Label = new Label();
             unplayedOnlyCheckBox = new CheckBox();
             matchupListBox = new ListBox();
-            roundValue = new ComboBox();
+            roundDropDown = new ComboBox();
             score1Value = new TextBox();
             score2Value = new TextBox();
             scoreButton = new Button();
@@ -134,6 +134,7 @@
             unplayedOnlyCheckBox.TabIndex = 8;
             unplayedOnlyCheckBox.Text = "Unplayed Only";
             unplayedOnlyCheckBox.UseVisualStyleBackColor = true;
+            unplayedOnlyCheckBox.CheckedChanged += unplayedOnlyCheckBox_CheckedChanged;
             // 
             // matchupListBox
             // 
@@ -143,14 +144,16 @@
             matchupListBox.Name = "matchupListBox";
             matchupListBox.Size = new Size(269, 224);
             matchupListBox.TabIndex = 9;
+            matchupListBox.SelectedIndexChanged += matchupListBox_SelectedIndexChanged;
             // 
-            // roundValue
+            // roundDropDown
             // 
-            roundValue.FormattingEnabled = true;
-            roundValue.Location = new Point(174, 118);
-            roundValue.Name = "roundValue";
-            roundValue.Size = new Size(151, 28);
-            roundValue.TabIndex = 10;
+            roundDropDown.FormattingEnabled = true;
+            roundDropDown.Location = new Point(174, 118);
+            roundDropDown.Name = "roundDropDown";
+            roundDropDown.Size = new Size(151, 28);
+            roundDropDown.TabIndex = 10;
+            roundDropDown.SelectedIndexChanged += roundDropDown_SelectedIndexChanged;
             // 
             // score1Value
             // 
@@ -174,6 +177,7 @@
             scoreButton.TabIndex = 13;
             scoreButton.Text = "Score";
             scoreButton.UseVisualStyleBackColor = true;
+            scoreButton.Click += scoreButton_Click;
             // 
             // TournamentViewerForm
             // 
@@ -183,7 +187,7 @@
             Controls.Add(scoreButton);
             Controls.Add(score2Value);
             Controls.Add(score1Value);
-            Controls.Add(roundValue);
+            Controls.Add(roundDropDown);
             Controls.Add(matchupListBox);
             Controls.Add(unplayedOnlyCheckBox);
             Controls.Add(score2Label);
@@ -196,6 +200,7 @@
             Controls.Add(tournamentLabel);
             Name = "TournamentViewerForm";
             Text = "TournamentViewerForm";
+            InputLanguageChanged += TournamentViewerForm_InputLanguageChanged;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -212,7 +217,7 @@
         private Label score2Label;
         private CheckBox unplayedOnlyCheckBox;
         private ListBox matchupListBox;
-        private ComboBox roundValue;
+        private ComboBox roundDropDown;
         private TextBox score1Value;
         private TextBox score2Value;
         private Button scoreButton;
