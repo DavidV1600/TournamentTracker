@@ -14,7 +14,7 @@ namespace TrackerLibrary.DataAcces
     {
         private const string db = "Data Source=.\\SQLEXPRESS;Initial Catalog=Tournaments;Integrated Security=True";
 
-        public Person CreatePerson(Person model)
+        public void CreatePerson(Person model)
         {
             string connectionString = db;
             SqlConnection conn = new SqlConnection(connectionString);
@@ -29,10 +29,9 @@ namespace TrackerLibrary.DataAcces
             cmd =new SqlCommand(query, conn);
             model.Id=(int)cmd.ExecuteScalar();
             conn.Close();
-            return model;
         }
 
-        public Prize CreatePrize(Prize model)
+        public void CreatePrize(Prize model)
         {
             string connectionString = db;
             SqlConnection conn=new SqlConnection(connectionString);
@@ -48,11 +47,10 @@ namespace TrackerLibrary.DataAcces
             cmd=new SqlCommand(query,conn);
             model.Id=(int)cmd.ExecuteScalar();
             conn.Close();
-            return model;
 
         }
 
-        public Team CreateTeam(Team model)
+        public void CreateTeam(Team model)
         {
             string connectionString = db;
             SqlConnection conn = new SqlConnection(connectionString);
@@ -80,7 +78,6 @@ namespace TrackerLibrary.DataAcces
             }
 
             conn.Close();
-            return model;
         }
 
         public void CreateTournament(Tournament model)
@@ -163,6 +160,8 @@ namespace TrackerLibrary.DataAcces
             }
 
             conn.Close();
+
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
         public List<Person> GetPerson_All()

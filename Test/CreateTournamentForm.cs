@@ -122,10 +122,9 @@ namespace Test
             }
 
             Tournament tm=new Tournament();
+
             tm.TournamentName = tournamentNameValue.Text;
-
             tm.EntryFee = fee;
-
             tm.Prizes = selectedPrizes;
             tm.EnteredTeams = selectedTeams;
 
@@ -134,6 +133,10 @@ namespace Test
             TournamentLogic.CreateRounds(tm);
 
             GlobalConfig.Connections[0].CreateTournament(tm);
+
+            TournamentViewerForm frm = new TournamentViewerForm(tm);
+            frm.Show();
+            this.Close();
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Test
                 p.Email = emailValue.Text;
                 p.CellPhone = cellphoneValue.Text;
 
-                p = GlobalConfig.Connections[0].CreatePerson(p);//Am folosit 0 pentru conexiunea cu sql
+                GlobalConfig.Connections[0].CreatePerson(p);//Am folosit 0 pentru conexiunea cu sql
 
                 selectedTeamMembers.Add(p);
 

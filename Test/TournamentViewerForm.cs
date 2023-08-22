@@ -219,41 +219,11 @@ namespace Test
                 }
             }
 
-            if (teamOneScore > teamTwoScore)
-            {
-                //Team one wins
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if (teamOneScore < teamTwoScore)
-            {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("It is a draw... for now");
-            }
+            TournamentLogic.UpdateTournamentResults(tournament);
 
-            foreach (List<Matchup> round in tournament.Rounds)
-            {
-                foreach (Matchup rm in round)
-                {
-                    foreach (MatchupEntry me in rm.Entries)
-                    {
-                        if (me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connections[0].UpdateMatchup(rm);
-                            }
-                        }
-                    }
-                }
+            LoadMatchups((int)roundDropDown.SelectedItem);
 
-                LoadMatchups((int)roundDropDown.SelectedItem);
-
-                GlobalConfig.Connections[0].UpdateMatchup(m);
-            }
+            
         }
     }
 }
