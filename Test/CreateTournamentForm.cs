@@ -134,6 +134,8 @@ namespace Test
 
             GlobalConfig.Connections[0].CreateTournament(tm);
 
+            //tm.AlertUsersToNewRound();
+
             TournamentViewerForm frm = new TournamentViewerForm(tm);
             frm.Show();
             this.Close();

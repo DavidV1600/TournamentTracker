@@ -14,6 +14,18 @@ namespace TrackerLibrary.DataAcces
     {
         private const string db = "Data Source=.\\SQLEXPRESS;Initial Catalog=Tournaments;Integrated Security=True";
 
+        public void CompleteTournament(Tournament model)
+        {
+            /*string connectionString = db;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string query = "Update dbo.Tournaments set Active = 0 where id=" + model.Id;
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.ExecuteNonQuery();*/
+            throw new NotImplementedException();
+        }
+
         public void CreatePerson(Person model)
         {
             string connectionString = db;

@@ -36,11 +36,12 @@ namespace TrackerLibrary
             if(endingRound > startingRound)
             {
                 //Mail the Players
-                //EmailLogic.SendEmail();
+                //tournament.AlertUsersToNewRound();
+                //Uncomment When emailing is ready
             }
         }
 
-        private static void AlertUsersToNewRound(this Tournament tournament)
+        public static void AlertUsersToNewRound(this Tournament tournament)
         {
             int currentRoundNumber = tournament.CheckCurrentRound();
             List<Matchup> currentRound = tournament.Rounds.Where(x => x.First().MatchupRound == currentRoundNumber).First();
@@ -51,7 +52,7 @@ namespace TrackerLibrary
                 {
                     foreach (Person p in me.TeamCompeting.TeamMembers)
                     {
-                        AlertPersonToNewRound(p, me.TeamCompeting.TeamName, matchup.Entries.Where(x => x.TeamCompeting != me.TeamCompeting).FirstOrDefault();
+                        AlertPersonToNewRound(p, me.TeamCompeting.TeamName, matchup.Entries.Where(x => x.TeamCompeting != me.TeamCompeting).FirstOrDefault());
                     }
                 }
             }
@@ -59,8 +60,13 @@ namespace TrackerLibrary
 
         private static void AlertPersonToNewRound(Person p, string teamName, MatchupEntry competitor)
         {
-            string from = "";
-            List<string> to = new List<string>();
+            if(p.Email.Length ==0)
+            {
+                return;
+            }
+
+            string fromAdress = "david.voinescu20030616@gmail.com";
+            string toAdress = "";
             string subject = "";
             StringBuilder body = new StringBuilder();
 
@@ -81,8 +87,9 @@ namespace TrackerLibrary
                 body.AppendLine("~Tournament Tracker");
             }
 
+            toAdress = p.Email;
 
-            EmailLogic.SendEmail(from, to, subject, body);
+            EmailLogic.SendEmail(fromAdress, toAdress, subject, body.ToString());
         }
 
         private static int CheckCurrentRound(this Tournament model)

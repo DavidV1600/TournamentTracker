@@ -171,8 +171,37 @@ namespace Test
 
         }
 
+        private string ValidateData()
+        {
+            string output = "";
+
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+
+            bool score1Valid = double.TryParse(score1Value.Text, out teamOneScore);
+            bool score2Valid = double.TryParse(score2Value.Text, out teamTwoScore);
+
+            if(!score1Valid || !score2Valid)
+            {
+                output = "The Score for one of the teams is not valid";
+            }
+            if(teamOneScore == teamTwoScore)
+            {
+                output = "The score between the teams can't be a tie";
+            }
+
+            return output;
+        }
+
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            string errorMessage=ValidateData();
+            if (errorMessage!="")
+            {
+                MessageBox.Show("Error Message: "+errorMessage);
+                return;
+            }
+
             Matchup m = (Matchup)matchupListBox.SelectedItem;
             double teamOneScore = 0;
             double teamTwoScore = 0;
@@ -218,9 +247,15 @@ namespace Test
 
                 }
             }
-
-            TournamentLogic.UpdateTournamentResults(tournament);
-
+            try
+            {
+                TournamentLogic.UpdateTournamentResults(tournament);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("The aplication had the following error " + ex.Message);
+                return;
+            }
             LoadMatchups((int)roundDropDown.SelectedItem);
 
             
