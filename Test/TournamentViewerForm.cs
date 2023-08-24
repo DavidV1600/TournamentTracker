@@ -24,10 +24,19 @@ namespace Test
 
             tournament = tournamentModel;
 
+            tournament.OnTournamentComplete += Tournament_OnTournamentComplete;
+
             WireUpLists();
 
             LoadFormData();
+
             LoadRounds();
+        }
+
+        private void Tournament_OnTournamentComplete(object? sender, DateTime e)
+        {
+            MessageBox.Show("Tournament Has Finished!");
+            this.Close();
         }
 
         private void LoadFormData()
