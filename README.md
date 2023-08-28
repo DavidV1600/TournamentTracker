@@ -37,6 +37,14 @@ The Project can save data in both Sql and Txt format, but because my Database is
    ```
 After that you have to go in TextConnectorProccesor and change the FullFilePath() function, and instead of the return line there put the location where you want your data to be saved
    ```sh
-                           return $"YourSavingLocation//{FileName}";//cre ca trebe \ nu /
+                           return $"YourSavingLocation//{FileName}";
    ```
 To Run the Project simply select TrackerUI as the StartUp Project if it isn't already and click Run. 
+
+
+### References
+Tim Corey Tutorial - https://www.youtube.com/watch?v=HalXZUHfKLA&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
+
+Dapper Official Site - https://dappertutorial.net/
+
+Microsoft Page for using SSMS - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
