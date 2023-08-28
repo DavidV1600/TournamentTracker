@@ -9,25 +9,17 @@
   <h3 align="center">Tournament Tracker Application</h3>
 </div>
 
-<!-- ABOUT THE PROJECT -->
+![Screenshot_4](https://github.com/DavidV1600/TournamentTracker/assets/115104357/48c40453-6883-4f54-9198-3399e81f8890)
+
 ## About The Project
-![image](https://github.com/DavidV1600/TournamentTracker/assets/115104357/9bab781b-5179-4f13-b6eb-b0a0e9423029)
-
-
 Why am I building this?
-* Because I have never seen an application that can manage different type of tournaments, (not only Single Elimination), and I want to create one that can let you chose what type of tournament format you want
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+* Because I want to make an app that also has a decent looking UI, and also because I want to make use of the Databases knowledge I gained recently
 
 ### Built With
 
 * Net.Core v7.0
 * Dapper
 * MySqlConnector
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ### Installation
 
@@ -39,6 +31,12 @@ Why am I building this?
    
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
+The Project can save data in both Sql and Txt format, but because my Database is local you cannot save to it so, instead go to Program.cs and set the connection only for Txt or only copy the line below and change it with the one in the code.
+   ```sh
+               TrackerLibrary.GlobalConfig.InitializeConnections(false,true);//1-Sql, 2-Txt
+   ```
+After that you have to go in TextConnectorProccesor and change the FullFilePath() function, and instead of the return line there put the location where you want your data to be saved
+   ```sh
+                           return $"YourSavingLocation//{FileName}";//cre ca trebe \ nu /
+   ```
+To Run the Project simply select TrackerUI as the StartUp Project if it isn't already and click Run. 
