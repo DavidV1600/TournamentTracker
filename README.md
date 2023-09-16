@@ -9,6 +9,7 @@
   <h3 align="center">Tournament Tracker Application</h3>
 </div>
 
+## Preview of the Project
 ![Tournament_tracker](https://github.com/DavidV1600/TournamentTracker/assets/115104357/2957d2e8-275c-4acc-b9b4-2feac4744886)
 
 ## About The Project
