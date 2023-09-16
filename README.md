@@ -9,7 +9,7 @@
   <h3 align="center">Tournament Tracker Application</h3>
 </div>
 
-![Screenshot_4](https://github.com/DavidV1600/TournamentTracker/assets/115104357/48c40453-6883-4f54-9198-3399e81f8890)
+![image](https://github.com/DavidV1600/TournamentTracker/assets/115104357/917b0013-bd40-4cc2-949d-e242e3309c46)
 
 ## About The Project
 Why am I building this?
